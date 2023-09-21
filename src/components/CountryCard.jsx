@@ -7,11 +7,6 @@ const CountryCard = ({ country }) => {
   for (const language in country.languages) {
     languages.push(country.languages[language]);
   }
-  //console.log(country.flags.png);
-
-  // country.currencies
-  //   ? console.log(Object.values(country.currencies)[0].name)
-  //   : console.log('no currency found');
 
   return (
     <Col className='mt-5'>
