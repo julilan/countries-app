@@ -22,7 +22,7 @@ const CountryCard = ({ country }) => {
         <Card className='h-100'>
           <Card.Body className='d-flex flex-column'>
             <Card.Title>{country.name.common}</Card.Title>
-            <Card.Subtitle className='mb-5 text-muted'>
+            <Card.Subtitle className='mb-2 text-muted'>
               {country.name.official}
             </Card.Subtitle>
             <Card.Img src={country.flags.svg} alt='flag' />
