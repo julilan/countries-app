@@ -12,16 +12,23 @@ const Countries = () => {
   const dispatch = useDispatch();
   const countriesList = useSelector((state) => state.countries.countries);
   const loading = useSelector((state) => state.countries.isLoading);
-
-  console.log('CountriesList: ', countriesList);
-
   const [search, setSearch] = useState('');
+  const [searchFilter, setSearchFilter] = useState([]);
 
-  console.log('Search: ', search);
+  //console.log('CountriesList: ', countriesList);
+
+  //console.log('Search: ', search);
 
   useEffect(() => {
     dispatch(initializeCountries());
   }, [dispatch]);
+
+  useEffect(() => {
+    const filteredCountries = countriesList.filter((country) =>
+      country.name.common.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchFilter(filteredCountries);
+  }, [search, countriesList]);
 
   return (
     <Container fluid>
@@ -39,9 +46,9 @@ const Countries = () => {
           </Form>
         </Col>
       </Row>
-      <Row xs={2} md={3} lg={4} className=' g-3'>
+      <Row xs={2} md={3} lg={5} className=' g-3'>
         {/* Search filter */}
-        {countriesList.map((country) => {
+        {searchFilter.map((country) => {
           return <CountryCard country={country} key={country.name.common} />;
         })}
       </Row>
