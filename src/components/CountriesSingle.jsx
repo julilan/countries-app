@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Col, Container } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const CountriesSingle = () => {
@@ -17,28 +17,80 @@ const CountriesSingle = () => {
   const country = location.state.country;
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
-      )
-      .catch((err) => {
-        setErrors(true);
-      })
-      .then((res) => {
-        setWeather(res.data);
-        setLoading(false);
-      });
+    if (!country.capital) {
+      setLoading(false);
+      setErrors(true);
+    } else {
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+        )
+        .catch((error) => {
+          console.log(error);
+          setErrors(true);
+        })
+        .then((res) => {
+          setWeather(res.data);
+          setLoading(false);
+        });
+    }
   }, [country.capital]);
 
   console.log('Weather: ', weather);
 
+  if (loading) {
+    return (
+      <Container>
+        <Spinner
+          animation='border'
+          role='status'
+          className='center'
+          variant='info'
+        >
+          {/* Accessiblity */}
+          <span className='visually-hidden'>Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
   return (
     <Container>
-      <Col className='mt-5'>
-        <h2>{country.name.common}</h2>
-        <p>Temperature: {weather.main.temp}</p>
-        <p>{weather.weather[0].description}</p>
-      </Col>
+      <Row className='mt-5'>
+        <Col>
+          <Image
+            thumbnail
+            src={`https://source.unsplash.com/1600x900/?${country.capital}`}
+          />
+        </Col>
+        <Col>
+          <h2 className='display-4'>{country.name.common}</h2>
+          <h3>{country.capital}</h3>
+          {errors && (
+            <p>Sorry, we don't have weather information for this country</p>
+          )}
+          {!errors && weather && (
+            <>
+              <p>
+                Right now it is <strong>{parseInt(weather.main.temp)}</strong>{' '}
+                degrees in {country.capital} and{' '}
+                {weather.weather[0].description}
+              </p>
+              <img
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                alt={`${weather.weather[0].description}`}
+              />
+            </>
+          )}
+        </Col>
+      </Row>
+      <Row className='mt-5'>
+        <Col>
+          <Button variant='dark' onClick={() => navigate('/countries')}>
+            Back to countries
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 };
