@@ -1,5 +1,5 @@
 # Countries app
 
-## Awknowledgements
+## Acknowledgements
 
-Kudos to Martin for guidance.
+Kudos to [Martin Holland](https://github.com/martin-holland) for guidance. 👏
