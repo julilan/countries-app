@@ -6,11 +6,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { auth, logout } from '../auth/firebase';
 
 const Layout = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate();
   return (
     <Container fluid>
       <Row>
@@ -34,6 +35,7 @@ const Layout = () => {
               </Nav>
             </Navbar.Collapse>
             {user && <Button onClick={logout}>Logout</Button>}
+            {!user && <Button onClick={() => navigate('/login')}>Login</Button>}
           </Container>
         </Navbar>
       </Row>
