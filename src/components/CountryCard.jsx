@@ -18,7 +18,7 @@ const CountryCard = ({ country }) => {
           <Card.Body className='d-flex flex-column'>
             <Card.Title>{country.name.common}</Card.Title>
             <Card.Subtitle className='mb-2 text-muted'>
-              {country.name.official}
+              {country.capital}
             </Card.Subtitle>
             <Card.Img src={country.flags.svg} alt='flag' />
             <ListGroup
@@ -35,7 +35,7 @@ const CountryCard = ({ country }) => {
                   : 'no currency'}
               </ListGroup.Item>
               <ListGroup.Item>
-                <i className='bi bi-people me-2'></i> {country.population}
+                <i className='bi bi-people me-2'></i> {country.population.toLocaleString()}
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
