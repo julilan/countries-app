@@ -16,7 +16,7 @@ const CountryCard = ({ country }) => {
       >
         <Card className='h-100'>
           <Card.Body className='d-flex flex-column'>
-            <Card.Title>{country.name.common}</Card.Title>
+            <Card.Title className='d-flex justify-content-between'>{country.name.common} <i className="bi bi-heart"></i></Card.Title>
             <Card.Subtitle className='mb-2 text-muted'>
               {country.capital}
             </Card.Subtitle>
