@@ -10,7 +10,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { auth, logout } from '../auth/firebase';
 
 const Layout = () => {
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   return (
     <Container fluid>
@@ -26,6 +26,9 @@ const Layout = () => {
                 <LinkContainer to='/countries'>
                   <Nav.Link>Countries</Nav.Link>
                 </LinkContainer>
+                <LinkContainer to='/favourites'>
+                  <Nav.Link>Favourites</Nav.Link>
+                </LinkContainer>
                 <LinkContainer to='/login'>
                   <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
@@ -34,8 +37,10 @@ const Layout = () => {
                 </LinkContainer>
               </Nav>
             </Navbar.Collapse>
-            {user && <Button onClick={logout}>Logout</Button>}
-            {!user && <Button onClick={() => navigate('/login')}>Login</Button>}
+            {user && !loading && <Button onClick={logout}>Logout</Button>}
+            {!user && !loading && (
+              <Button onClick={() => navigate('/login')}>Login</Button>
+            )}
           </Container>
         </Navbar>
       </Row>
