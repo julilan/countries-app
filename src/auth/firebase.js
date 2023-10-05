@@ -13,7 +13,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  setDoc,
   where,
 } from 'firebase/firestore';
 
@@ -64,7 +63,7 @@ const logout = () => {
 
 const addFavouriteToFirebase = async (uid, country) => {
   try {
-    await setDoc(collection(db, `users/${uid}/favourites`), {
+    await addDoc(collection(db, `users/${uid}/favourites`), {
       country,
     });
     console.log('Favourite added to Firebase database');
