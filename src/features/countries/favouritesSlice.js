@@ -5,9 +5,6 @@ const favourites =
     ? JSON.parse(localStorage.getItem('favourites'))
     : [];
 
-// Can be user for testing
-// const favourites = ['Finland'];
-
 export const favouritesSlice = createSlice({
   name: 'favourites',
   initialState: {
@@ -27,6 +24,8 @@ export const favouritesSlice = createSlice({
         newArray.findIndex((e) => e === action.payload),
         1
       );
+      // Update localStorage favourites
+      localStorage.setItem('favourites', JSON.stringify(newArray));
       state.favourites = [...newArray];
     },
     clearFavourites(state, action) {
