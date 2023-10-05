@@ -6,12 +6,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { addDoc, collection, getFirestore, setDoc } from 'firebase/firestore';
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  where,
+} from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -59,7 +64,7 @@ const logout = () => {
 
 const addFavouriteToFirebase = async (uid, country) => {
   try {
-    await setDoc(collection(db, 'users', uid, 'favourites'), {
+    await setDoc(collection(db, `users/${uid}/favourites`), {
       country,
     });
     console.log('Favourite added to Firebase database');
@@ -68,11 +73,46 @@ const addFavouriteToFirebase = async (uid, country) => {
   }
 };
 
+const removeFavouriteFromFirebase = async (uid, country) => {
+  try {
+    if (!country) {
+      console.log('No country to remove');
+      return;
+    }
+    const q = query(
+      collection(db, `users/${uid}/favourites`),
+      where('country', '==', country)
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+      console.log('Favourite removed from Firebase database');
+    });
+  } catch (error) {
+    console.log('Error removing favourite from Firebase database', error);
+  }
+};
+
+const clearFavouritesFromFirebase = async (uid) => {
+  try {
+    const q = query(collection(db, `users/${uid}/favourites`));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+      console.log('Favourites removed from Firebase database');
+    });
+  } catch (error) {
+    console.log('Error removing favourites from Firebase database', error);
+  }
+};
+
 export {
   addFavouriteToFirebase,
   auth,
+  clearFavouritesFromFirebase,
   db,
   loginWithEmailAndPassword,
   logout,
   registerWithEmailAndPassword,
+  removeFavouriteFromFirebase,
 };
