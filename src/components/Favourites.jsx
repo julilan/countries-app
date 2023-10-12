@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { initializeCountries } from '../features/countries/countriesSlice';
-import { clearFavourites } from '../features/countries/favouritesSlice';
+import {
+  clearFavourites,
+  getFavouritesFromSource,
+} from '../features/countries/favouritesSlice';
 import CountryCard from './CountryCard';
 
 const Favourites = () => {
   const dispatch = useDispatch();
   let countriesList = useSelector((state) => state.countries.countries);
-  const loading = useSelector((state) => state.countries.loading);
+  const countriesLoading = useSelector((state) => state.countries.isLoading);
+  const favouritesLoading = useSelector((state) => state.favourites.isLoading);
   const [search, setSearch] = useState('');
   const favouritesList = useSelector((state) => state.favourites.favourites);
   if (favouritesList !== null) {
@@ -20,8 +24,10 @@ const Favourites = () => {
   }
   useEffect(() => {
     dispatch(initializeCountries());
+    dispatch(getFavouritesFromSource());
   }, [dispatch]);
-  if (loading) {
+
+  if (favouritesLoading || countriesLoading) {
     return (
       <Col className='text-center m-5'>
         <Spinner

@@ -61,10 +61,10 @@ const logout = () => {
   signOut(auth);
 };
 
-const addFavouriteToFirebase = async (uid, country) => {
+const addFavouriteToFirebase = async (uid, name) => {
   try {
     await addDoc(collection(db, `users/${uid}/favourites`), {
-      country,
+      name,
     });
     console.log('Favourite added to Firebase database');
   } catch (error) {
@@ -72,15 +72,15 @@ const addFavouriteToFirebase = async (uid, country) => {
   }
 };
 
-const removeFavouriteFromFirebase = async (uid, country) => {
+const removeFavouriteFromFirebase = async (uid, name) => {
   try {
-    if (!country) {
+    if (!name) {
       console.log('No country to remove');
       return;
     }
     const q = query(
       collection(db, `users/${uid}/favourites`),
-      where('country', '==', country)
+      where('name', '==', name)
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
