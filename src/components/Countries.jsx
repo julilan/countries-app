@@ -21,8 +21,8 @@ const Countries = () => {
   return (
     <Container fluid>
       <Row>
-        <Col className='mt-5 d-flex justify-content-center'>
-          <Form>
+        <Col className='mt-4 d-flex justify-content-center'>
+          <Form className='mt-3'>
             <Form.Control
               style={{ width: '18rem' }}
               type='search'
@@ -34,7 +34,7 @@ const Countries = () => {
           </Form>
         </Col>
       </Row>
-      <Row xs={2} md={3} lg={4} className=' g-3'>
+      <Row xs={1} sm={2} md={3} lg={4} className='g-4 mx-2'>
         {/* Search filter */}
         {countriesList.reduce((acc, country) => {
           if (

@@ -44,36 +44,38 @@ const Favourites = () => {
   return (
     <Container fluid>
       <Row>
-        <Col className='mt-5 d-flex justify-content-center'>
-          <Form>
+        <Col className='mt-4 d-flex flex-wrap justify-content-center'>
+          <Form className='mt-3'>
             <Form.Control
               style={{ width: '18rem' }}
               type='search'
               className='me-2 '
-              placeholder='Search for countries'
+              placeholder='Search for favourites'
               aria-label='Search'
               onChange={(e) => setSearch(e.target.value)}
             />
           </Form>
+          <Button
+            className='mt-3'
+            onClick={() => {
+              dispatch(clearFavourites());
+            }}
+          >
+            Clear Favourites
+          </Button>
         </Col>
       </Row>
-      <Row xs={2} md={3} lg={4} className=' g-3'>
-        <Button
-          onClick={() => {
-            dispatch(clearFavourites());
-          }}
-        >
-          Clear Favourites
-        </Button>
-      </Row>
-      <Row xs={2} md={3} lg={4} className=' g-3'>
-        {countriesList
-          .filter((c) => {
-            return c.name.official.toLowerCase().includes(search.toLowerCase());
-          })
-          .map((country) => (
-            <CountryCard key={country.name.common} country={country} />
-          ))}
+      <Row xs={1} sm={2} md={3} lg={4} className='g-4 mx-2'>
+        {countriesList.reduce((acc, country) => {
+          if (
+            country.name.common.toLowerCase().includes(search.toLowerCase())
+          ) {
+            acc.push(
+              <CountryCard country={country} key={country.name.common} />
+            );
+          }
+          return acc;
+        }, [])}
       </Row>
     </Container>
   );
