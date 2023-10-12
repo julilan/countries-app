@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, loginWithEmailAndPassword } from '../auth/firebase';
@@ -17,7 +17,28 @@ const Login = () => {
 
   return (
     <div>
-      <input
+      <h2>Login to Countries App 🚀</h2>
+      <Form>
+        <Form.Group className='mb-3' controlId='formBasicEmail'>
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Enter email'
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Enter password'
+          />
+        </Form.Group>
+      </Form>
+      {/* <input
         type='email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
@@ -28,11 +49,11 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder='Password'
-      />
+      /> */}
       <Button onClick={() => loginWithEmailAndPassword(email, password)}>
         Login
       </Button>
-      <div>
+      <div className='mt-3'>
         Don't have an account? <Link to='/register'>Register</Link>
       </div>
     </div>
