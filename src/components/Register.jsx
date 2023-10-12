@@ -23,7 +23,7 @@ const Register = () => {
 
   return (
     <div>
-      <h2>Register to Countries App 🚀</h2>
+      <h2 className='mt-4'>Register to Countries App 🚀</h2>
       <Form>
         <Form.Group className='mb-3' controlId='formBasicUsername'>
           <Form.Label>Name</Form.Label>
