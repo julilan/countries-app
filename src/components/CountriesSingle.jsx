@@ -58,6 +58,17 @@ const CountriesSingle = () => {
     <Container>
       <Row className='mt-5'>
         <Col>
+          <iframe
+            title='Google Maps Embed'
+            src={`https://www.google.com/maps/embed/v1/place?key=${
+              process.env.REACT_APP_GOOGLE_MAPS_EMBED_API_KEY
+            }&q=${encodeURIComponent(country.capital)}`}
+            width='100%'
+            height='100%'
+            allowFullScreen
+          ></iframe>
+        </Col>
+        <Col>
           <Image
             thumbnail
             src={`https://source.unsplash.com/1600x900/?${country.capital}`}
