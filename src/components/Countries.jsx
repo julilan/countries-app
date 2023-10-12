@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { Spinner } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -17,6 +18,21 @@ const Countries = () => {
   useEffect(() => {
     dispatch(initializeCountries());
   }, [dispatch]);
+
+  if (loading) {
+    return (
+      <Col className='text-center m-5'>
+        <Spinner
+          animation='border'
+          role='status'
+          className='center'
+          variant='info'
+        >
+          <span className='visually-hidden'>Loading...</span>
+        </Spinner>
+      </Col>
+    );
+  }
 
   return (
     <Container fluid>
