@@ -6,20 +6,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { auth, logout } from '../auth/firebase';
 
 const Layout = () => {
   const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
+
   return (
     <Container fluid>
       <Row>
-        <Navbar bg='light' variant='light'>
+        <Navbar bg='light' variant='light' expand='lg'>
           <Container className='justify-content-end'>
+            <Navbar.Brand href='/'>Countries App</Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
-              <Nav>
+              <Nav className='me-auto'>
                 <LinkContainer to='/'>
                   <Nav.Link>Home</Nav.Link>
                 </LinkContainer>
@@ -29,18 +30,26 @@ const Layout = () => {
                 <LinkContainer to='/favourites'>
                   <Nav.Link>Favourites</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to='/login'>
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to='/register'>
-                  <Nav.Link>Register</Nav.Link>
-                </LinkContainer>
+              </Nav>
+              <Nav>
+                {!user ? (
+                  <>
+                    <LinkContainer to='/register'>
+                      <Nav.Link>Register</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to='/login'>
+                      <Button variant='primary' hidden={loading}>
+                        Login
+                      </Button>
+                    </LinkContainer>
+                  </>
+                ) : (
+                  <Button variant='primary' hidden={loading} onClick={logout}>
+                    Logout
+                  </Button>
+                )}
               </Nav>
             </Navbar.Collapse>
-            {user && !loading && <Button onClick={logout}>Logout</Button>}
-            {!user && !loading && (
-              <Button onClick={() => navigate('/login')}>Login</Button>
-            )}
           </Container>
         </Navbar>
       </Row>
