@@ -9,6 +9,7 @@ Built with:
 - Redux & Redux Toolkit
 - Bootstrap & React Bootstrap
 - Firebase Authentication
+- Firestore Database
 
 ## Setup and usage
 
