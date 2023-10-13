@@ -25,7 +25,7 @@ Create an .env file or rename .env.example. Update your api keys and configs in 
 
 Install dependencies with `npm install` and run app in development mode with `npm start`.
 
-## Authors and acknowledgements
+## Author and acknowledgements
 
 Julianna Molnár
 - GitHub @julilan
