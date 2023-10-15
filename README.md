@@ -1,6 +1,6 @@
 # Countries app
 
-The purpose of this repository is to practice React and Redux. The app uses the [REST Countries API](https://restcountries.com/) to display a list of countries, [Open Weather API](https://openweathermap.org/api) for weather details and [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started) for maps. This app is built with React and uses Redux and Redux Toolkit for state management. The app uses Firebase Authentication to allow users to sign up and log in and it uses Firestore Database to store user data and their favourites.
+The purpose of this repository is to practice React and Redux to build a countries app. The app uses the [REST Countries API](https://restcountries.com/) to display a list of countries, [Open Weather API](https://openweathermap.org/api) for weather details and [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started) for maps. This app is built with React and uses Redux and Redux Toolkit for state management. The app uses Firebase Authentication to allow users to sign up and log in and it uses Firestore Database to store user data and their favourites.
 ## Technologies used
 
 Built with:
