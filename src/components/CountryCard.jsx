@@ -47,7 +47,6 @@ const CountryCard = ({ country }) => {
               <Card.Subtitle className='mb-2 text-muted'>
                 {country.capital}
               </Card.Subtitle>
-              {/* <Card.Img src={country.flags.svg} alt='flag' /> */}
               <ListGroup
                 variant='flush'
                 className='flex-grow-1 justify-content-end'
