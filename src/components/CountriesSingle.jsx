@@ -25,28 +25,29 @@ const CountriesSingle = () => {
         .get(
           `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
         )
+        .then((res) => {
+          setWeather(res.data);
+          setLoading(false);
+        })
         .catch((error) => {
-          console.log(error);
           // If the city is not found, try fetching weather data with the country name
           axios
             .get(
-              `https://api.openweathermap.org/data/2.5/weather?q=${country.name.common}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+              `https://api.openweathermap.org/data/2.5/weather?q=${country.name.official}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
             )
             .then((res) => {
               setWeather(res.data);
-              setLoading(false);
             })
             .catch((error) => {
               console.log(error);
               setErrors(true);
+            })
+            .finally(() => {
+              setLoading(false);
             });
-        })
-        .then((res) => {
-          setWeather(res.data);
-          setLoading(false);
         });
     }
-  }, [country.capital, country.name.common]);
+  }, [country.capital, country.name.official]);
 
   console.log('Weather: ', weather);
 
