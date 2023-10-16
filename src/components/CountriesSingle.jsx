@@ -49,7 +49,7 @@ const CountriesSingle = () => {
     }
   }, [country.capital, country.name.official]);
 
-  console.log('Weather: ', weather);
+  //console.log('Weather: ', weather);
 
   if (loading) {
     return (
@@ -68,50 +68,62 @@ const CountriesSingle = () => {
   }
 
   return (
-    <Container>
-      <Row className='mt-5'>
-        <Col>
-          <iframe
-            title='Google Maps Embed'
-            src={`https://www.google.com/maps/embed/v1/place?key=${
-              process.env.REACT_APP_GOOGLE_MAPS_EMBED_API_KEY
-            }&q=${encodeURIComponent(country.capital)}`}
-            width='100%'
-            height='100%'
-            allowFullScreen
-          ></iframe>
-        </Col>
-        <Col>
-          <Image
-            thumbnail
-            src={`https://source.unsplash.com/1600x900/?${country.capital}`}
-          />
-        </Col>
-        <Col>
-          <h2 className='display-4'>{country.name.common}</h2>
-          <h3>{country.capital}</h3>
-          {errors && (
-            <p>Sorry, we don't have weather information for this country</p>
-          )}
-          {!errors && weather && (
-            <>
-              <p>
-                Right now it is <strong>{parseInt(weather.main.temp)}</strong>{' '}
-                degrees in {country.capital} and{' '}
-                {weather.weather[0].description}
-              </p>
-              <img
-                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                alt={`${weather.weather[0].description}`}
-              />
-            </>
-          )}
-        </Col>
-      </Row>
-      <Row className='mt-5'>
-        <Col>
+    <Container className='mt-4'>
+      <Container className='bg-light p-4 rounded'>
+        <Row
+          xs={1}
+          sm={2}
+          md={3}
+          lg={4}
+          className='g-3 d-flex justify-content-center'
+        >
+          <Col>
+            <h2 className='display-4'>{country.name.common}</h2>
+            <p className='fs-5'>
+              <i class='bi bi-globe'></i> {country.subregion}
+            </p>
+            <h3>{country.capital}</h3>
+            {errors && (
+              <p>Sorry, we don't have weather information for this country</p>
+            )}
+            {!errors && weather && (
+              <>
+                <p>
+                  Right now it is <strong>{parseInt(weather.main.temp)}</strong>{' '}
+                  degrees in {country.capital} and{' '}
+                  {weather.weather[0].description}
+                </p>
+                <img
+                  src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                  alt={`${weather.weather[0].description}`}
+                />
+              </>
+            )}
+            <p>Timezone: {country.timezones}</p>
+          </Col>
+          <Col>
+            <Image
+              thumbnail
+              src={`https://source.unsplash.com/1600x900/?${country.capital}`}
+            />
+          </Col>
+          <Col>
+            <iframe
+              title='Google Maps Embed'
+              src={`https://www.google.com/maps/embed/v1/place?key=${
+                process.env.REACT_APP_GOOGLE_MAPS_EMBED_API_KEY
+              }&q=${encodeURIComponent(country.capital)}`}
+              width='100%'
+              height='100%'
+              allowFullScreen
+            ></iframe>
+          </Col>
+        </Row>
+      </Container>
+      <Row className='my-4'>
+        <Col className='d-flex justify-content-center'>
           <Button variant='dark' onClick={() => navigate('/countries')}>
-            Back to countries
+            <i class='bi bi-arrow-left-short'></i> Back to countries
           </Button>
         </Col>
       </Row>
