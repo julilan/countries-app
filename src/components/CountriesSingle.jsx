@@ -27,14 +27,26 @@ const CountriesSingle = () => {
         )
         .catch((error) => {
           console.log(error);
-          setErrors(true);
+          // If the city is not found, try fetching weather data with the country name
+          axios
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?q=${country.name.common}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+            )
+            .then((res) => {
+              setWeather(res.data);
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.log(error);
+              setErrors(true);
+            });
         })
         .then((res) => {
           setWeather(res.data);
           setLoading(false);
         });
     }
-  }, [country.capital]);
+  }, [country.capital, country.name.common]);
 
   console.log('Weather: ', weather);
 
