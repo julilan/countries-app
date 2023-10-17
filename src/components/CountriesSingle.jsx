@@ -20,8 +20,13 @@ const CountriesSingle = () => {
 
   // Get the cca3 codes of the neighbouring countries
   const borderCountries = Object.values(country.borders ?? {});
-  // Use countries state from Redux to match the cca3 codes to the country names and get the full country object
+
   const countriesList = useSelector((state) => state.countries.countries);
+
+  // Sunrise, sunset and daylight times
+  let sunriseTime = '';
+  let sunsetTime = '';
+  let daylightLength = '';
 
   useEffect(() => {
     if (!country.capital) {
@@ -56,7 +61,27 @@ const CountriesSingle = () => {
     }
   }, [country.capital, country.name.official]);
 
-  //console.log('Weather: ', weather);
+  if (weather) {
+    const sunriseDate = new Date(weather.sys.sunrise * 1000);
+    const sunsetDate = new Date(weather.sys.sunset * 1000);
+
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      timeZoneName: 'short',
+    };
+
+    sunriseTime = sunriseDate.toLocaleString(undefined, options);
+    sunsetTime = sunsetDate.toLocaleString(undefined, options);
+
+    // Calculate daylight length
+    const daylightDuration = new Date(sunsetDate - sunriseDate);
+    const daylightHours = daylightDuration.getUTCHours();
+    const daylightMinutes = daylightDuration.getUTCMinutes();
+
+    daylightLength = `${daylightHours} hours ${daylightMinutes} minutes`;
+  }
 
   if (loading) {
     return (
@@ -105,11 +130,17 @@ const CountriesSingle = () => {
                   alt={`${weather.weather[0].description}`}
                   className='bg-info rounded mb-3'
                 />
+                <h4>
+                  Daylight <i className='bi bi-sun'></i>
+                </h4>
+                <p>Sunrise at {sunriseTime}</p>
+                <p>Sunset at {sunsetTime}</p>
+                <p>Daylight time: {daylightLength}</p>
               </>
             )}
             {borderCountries.length > 0 && (
               <div>
-                <p>Countries bordering {country.name.common}:</p>
+                <h4>Countries bordering {country.name.common}:</h4>
                 {borderCountries.map((borderCode) => {
                   const borderCountry = countriesList.find(
                     (country) => country.cca3 === borderCode
@@ -122,7 +153,7 @@ const CountriesSingle = () => {
                         state={{ country: borderCountry }}
                       >
                         <Button
-                          variant='secondary'
+                          variant='success'
                           size='sm'
                           className='me-2 mb-2'
                         >
