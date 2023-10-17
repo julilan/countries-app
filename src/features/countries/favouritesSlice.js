@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import {
   addFavouriteToFirebase,
   auth,
@@ -23,6 +24,7 @@ export const favouritesSlice = createSlice({
       const user = auth.currentUser;
       if (user) {
         addFavouriteToFirebase(user.uid, action.payload);
+        toast.success(`${action.payload} added to favourites`);
       }
     },
     removeFavourite(state, action) {
@@ -35,6 +37,7 @@ export const favouritesSlice = createSlice({
       const user = auth.currentUser;
       if (user) {
         removeFavouriteFromFirebase(user.uid, action.payload);
+        toast.success(`${action.payload} removed from favourites`);
       }
     },
     clearFavourites(state, action) {
@@ -42,6 +45,7 @@ export const favouritesSlice = createSlice({
       const user = auth.currentUser;
       if (user) {
         clearFavouritesFromFirebase(user.uid);
+        toast.success(`Favourites cleared`);
       }
     },
     isLoading(state, action) {

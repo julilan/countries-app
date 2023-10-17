@@ -7,6 +7,7 @@ import Layout from './pages/Layout';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Toaster } from 'react-hot-toast';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { auth } from './auth/firebase';
 import Favourites from './components/Favourites';
@@ -30,6 +31,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
+      <Toaster position='bottom-center' />
     </BrowserRouter>
   );
 };
