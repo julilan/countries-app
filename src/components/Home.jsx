@@ -1,7 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { LinkContainer } from 'react-router-bootstrap';
+import { auth } from '../auth/firebase';
 
 const Home = () => {
+  const [user, loading] = useAuthState(auth);
+
   return (
     <div
       className='d-flex min-vh-100'
@@ -19,11 +24,24 @@ const Home = () => {
         <div className='mb-4'>
           <h1 className='display-1 fw-bolder'>Welcome to Countries App!</h1>
         </div>
-        <div className='mb-4'>
+        <div className='my-4'>
           <p className='lead'>
             A React application made in Business College Helsinki lessons.
           </p>
         </div>
+        {!user && (
+          <>
+            <p>Start browsing countries by logging in!</p>
+            <LinkContainer to='/login'>
+              <Button variant='primary' hidden={loading} className='mb-3'>
+                Login <i className='bi bi-arrow-right-short'></i>
+              </Button>
+            </LinkContainer>
+          </>
+        )}
+        <p>
+          <strong>Check out the source code:</strong>
+        </p>
         <Button
           variant='outline-light'
           size='lg'
