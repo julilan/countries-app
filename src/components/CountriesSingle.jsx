@@ -28,6 +28,12 @@ const CountriesSingle = () => {
   let sunsetTime = '';
   let daylightLength = '';
 
+  // Case South Africa
+  let weatherCapital = '';
+  if (country.name.common === 'South Africa') {
+    weatherCapital = country.capital[0];
+  }
+
   useEffect(() => {
     if (!country.capital) {
       setLoading(false);
@@ -109,22 +115,30 @@ const CountriesSingle = () => {
           lg={4}
           className='g-3 d-flex justify-content-center'
         >
-          <Col>
+          <Col className=''>
             <h2 className='display-4'>{country.name.common}</h2>
             <p className='fs-5'>
-              <i class='bi bi-globe'></i> {country.subregion}
+              <i className='bi bi-globe'></i> {country.subregion}
             </p>
-            <h3>{country.capital}</h3>
+            <h3>{country.capital && country.capital.join(', ')}</h3>
             {errors && (
               <p>Sorry, we don't have weather information for this country</p>
             )}
             {!errors && weather && (
               <>
-                <p>
-                  Right now it is <strong>{parseInt(weather.main.temp)}</strong>{' '}
-                  degrees in {country.capital} and{' '}
-                  {weather.weather[0].description}
-                </p>
+                {weatherCapital.length > 0 ? (
+                  <p>
+                    Right now it is{' '}
+                    <strong>{parseInt(weather.main.temp)}</strong> degrees in{' '}
+                    {weatherCapital} and {weather.weather[0].description}
+                  </p>
+                ) : (
+                  <p>
+                    Right now it is{' '}
+                    <strong>{parseInt(weather.main.temp)}</strong> degrees in{' '}
+                    {country.capital} and {weather.weather[0].description}
+                  </p>
+                )}
                 <img
                   src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                   alt={`${weather.weather[0].description}`}
@@ -193,7 +207,7 @@ const CountriesSingle = () => {
       <Row className='my-4'>
         <Col className='d-flex justify-content-center'>
           <Button variant='dark' onClick={() => navigate('/countries')}>
-            <i class='bi bi-arrow-left-short'></i> Back to countries
+            <i className='bi bi-arrow-left-short'></i> Back to countries
           </Button>
         </Col>
       </Row>
