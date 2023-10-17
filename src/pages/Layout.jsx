@@ -46,9 +46,14 @@ const Layout = () => {
                     </LinkContainer>
                   </>
                 ) : (
-                  <Button variant='primary' hidden={loading} onClick={logout}>
-                    Logout
-                  </Button>
+                  <>
+                    <Navbar.Text className='me-2'>
+                      <i className='bi bi-person-circle'></i> {user.email}
+                    </Navbar.Text>
+                    <Button variant='primary' hidden={loading} onClick={logout}>
+                      Logout
+                    </Button>
+                  </>
                 )}
               </Nav>
             </Navbar.Collapse>
