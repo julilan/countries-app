@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Image, Row, Spinner } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const CountriesSingle = () => {
@@ -15,6 +17,11 @@ const CountriesSingle = () => {
 
   // Destructuring
   const country = location.state.country;
+
+  // Get the cca3 codes of the neighbouring countries
+  const borderCountries = Object.values(country.borders ?? {});
+  // Use countries state from Redux to match the cca3 codes to the country names and get the full country object
+  const countriesList = useSelector((state) => state.countries.countries);
 
   useEffect(() => {
     if (!country.capital) {
@@ -96,11 +103,38 @@ const CountriesSingle = () => {
                 <img
                   src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                   alt={`${weather.weather[0].description}`}
+                  className='bg-info rounded mb-3'
                 />
               </>
             )}
-            <p>Timezones: {country.timezones.join(', ')}</p>
-            {/* <p>{Object.values(country.borders ?? {}).join(', ')}</p> */}
+            {borderCountries.length > 0 && (
+              <div>
+                <p>Countries bordering {country.name.common}:</p>
+                {borderCountries.map((borderCode) => {
+                  const borderCountry = countriesList.find(
+                    (country) => country.cca3 === borderCode
+                  );
+                  if (borderCountry) {
+                    return (
+                      <LinkContainer
+                        key={borderCountry.cca3}
+                        to={`/countries/${borderCountry.name.common}`}
+                        state={{ country: borderCountry }}
+                      >
+                        <Button
+                          variant='secondary'
+                          size='sm'
+                          className='me-2 mb-2'
+                        >
+                          {borderCountry.name.common}
+                        </Button>
+                      </LinkContainer>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            )}
           </Col>
           <Col>
             <Image
