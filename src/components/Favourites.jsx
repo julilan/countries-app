@@ -65,7 +65,7 @@ const Favourites = () => {
           </Button>
         </Col>
       </Row>
-      <Row xs={1} sm={2} md={3} lg={4} className='g-4 mx-2'>
+      <Row xs={1} sm={2} md={3} lg={4} className='g-4 mx-2 mb-2'>
         {countriesList.reduce((acc, country) => {
           if (
             country.name.common.toLowerCase().includes(search.toLowerCase())
