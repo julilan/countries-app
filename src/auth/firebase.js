@@ -66,7 +66,6 @@ const addFavouriteToFirebase = async (uid, name) => {
     await addDoc(collection(db, `users/${uid}/favourites`), {
       name,
     });
-    console.log('Favourite added to Firebase database');
   } catch (error) {
     console.log('Error adding favourite to Firebase database', error);
   }
@@ -85,7 +84,6 @@ const removeFavouriteFromFirebase = async (uid, name) => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       deleteDoc(doc.ref);
-      console.log('Favourite removed from Firebase database');
     });
   } catch (error) {
     console.log('Error removing favourite from Firebase database', error);
@@ -98,7 +96,6 @@ const clearFavouritesFromFirebase = async (uid) => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       deleteDoc(doc.ref);
-      console.log('Favourites removed from Firebase database');
     });
   } catch (error) {
     console.log('Error removing favourites from Firebase database', error);
