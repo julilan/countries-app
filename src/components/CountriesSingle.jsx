@@ -99,7 +99,8 @@ const CountriesSingle = () => {
                 />
               </>
             )}
-            <p>Timezone: {country.timezones}</p>
+            <p>Timezones: {country.timezones.join(', ')}</p>
+            {/* <p>{Object.values(country.borders ?? {}).join(', ')}</p> */}
           </Col>
           <Col>
             <Image
@@ -112,7 +113,11 @@ const CountriesSingle = () => {
               title='Google Maps Embed'
               src={`https://www.google.com/maps/embed/v1/place?key=${
                 process.env.REACT_APP_GOOGLE_MAPS_EMBED_API_KEY
-              }&q=${encodeURIComponent(country.capital)}`}
+              }&q=${
+                encodeURIComponent(country.capital) +
+                '+' +
+                encodeURIComponent(country.name.common)
+              }`}
               width='100%'
               height='100%'
               allowFullScreen
