@@ -45,7 +45,7 @@ const CountryCard = ({ country }) => {
                 {country.name.common}
               </Card.Title>
               <Card.Subtitle className='mb-2 text-muted'>
-                {country.capital}
+                {country.capital && country.capital.join(', ')}
               </Card.Subtitle>
               <ListGroup
                 variant='flush'
