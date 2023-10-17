@@ -15,6 +15,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -34,9 +35,9 @@ const db = getFirestore(app);
 const loginWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    toast.success('Logged in successfully!');
   } catch (error) {
-    console.log(error);
-    alert(error.message);
+    toast.error(error.message);
   }
 };
 
@@ -44,6 +45,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
+    toast.success('Registration successful');
     // Create a new user in firestore
     await addDoc(collection(db, 'users'), {
       uid: user.uid,
@@ -52,13 +54,13 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       email,
     });
   } catch (error) {
-    console.log(error);
-    alert(error.message);
+    toast.error(error.message);
   }
 };
 
 const logout = () => {
   signOut(auth);
+  toast.success('Logged out successfully!');
 };
 
 const addFavouriteToFirebase = async (uid, name) => {
@@ -74,7 +76,6 @@ const addFavouriteToFirebase = async (uid, name) => {
 const removeFavouriteFromFirebase = async (uid, name) => {
   try {
     if (!name) {
-      console.log('No country to remove');
       return;
     }
     const q = query(

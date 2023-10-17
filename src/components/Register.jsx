@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth, registerWithEmailAndPassword } from '../auth/firebase';
 
@@ -12,7 +13,12 @@ const Register = () => {
   const navigate = useNavigate();
 
   const register = () => {
-    if (!name) alert('Please enter your name');
+    if (!name) {
+      return toast.error('Please enter your name');
+    }
+    if (!email) {
+      return toast.error('Please enter your email');
+    }
     registerWithEmailAndPassword(name, email, password);
   };
 
