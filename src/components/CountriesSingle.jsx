@@ -117,9 +117,12 @@ const CountriesSingle = () => {
         >
           <Col className=''>
             <h2 className='display-4'>{country.name.common}</h2>
-            <p className='fs-5'>
-              <i className='bi bi-globe'></i> {country.subregion}
-            </p>
+            {country.subregion && (
+              <p className='fs-5'>
+                <i className='bi bi-globe'></i> {country.subregion}
+              </p>
+            )}
+
             <h3>{country.capital && country.capital.join(', ')}</h3>
             {errors && (
               <p>Sorry, we don't have weather information for this country</p>
@@ -184,9 +187,12 @@ const CountriesSingle = () => {
           <Col>
             <Image
               thumbnail
-              src={`https://source.unsplash.com/1600x900/?${country.capital}`}
+              src={`https://source.unsplash.com/1600x900/?${
+                country.capital ? country.capital : country.name.common
+              }`}
             />
           </Col>
+
           <Col>
             <iframe
               title='Google Maps Embed'
