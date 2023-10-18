@@ -107,7 +107,7 @@ const CountriesSingle = () => {
 
   return (
     <Container className='mt-4'>
-      <Container className='bg-light p-4 rounded'>
+      <Container className='bg-light p-4 rounded shadow-sm'>
         <Row
           xs={1}
           sm={2}
