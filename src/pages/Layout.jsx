@@ -15,7 +15,13 @@ const Layout = () => {
   return (
     <Container fluid>
       <Row>
-        <Navbar bg='light' variant='light' expand='lg'>
+        <Navbar
+          bg='light'
+          variant='light'
+          expand='lg'
+          collapseOnSelect
+          className='shadow-sm rounded'
+        >
           <Container className='justify-content-end'>
             <LinkContainer to='/'>
               <Navbar.Brand href='/'>
