@@ -122,8 +122,7 @@ const CountriesSingle = () => {
                 <i className='bi bi-globe'></i> {country.subregion}
               </p>
             )}
-
-            <h3>{country.capital && country.capital.join(', ')}</h3>
+            <h3>{country.capital?.join(', ')}</h3>
             {errors && (
               <p>Sorry, we don't have weather information for this country</p>
             )}

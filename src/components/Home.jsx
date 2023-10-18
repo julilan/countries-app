@@ -47,7 +47,7 @@ const Home = () => {
           size='lg'
           href='https://github.com/julilan/countries-app'
           target='_blank'
-          ref={(el) => el && el.setAttribute('rel', 'noopener noreferrer')}
+          rel='noopener noreferrer'
         >
           <i className='bi bi-github'></i> GitHub
         </Button>
