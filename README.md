@@ -40,6 +40,12 @@ Create an `.env` file and update your API keys and configs in the .env file. You
 
 Install dependencies with `npm install` and run app in development mode with `npm start`.
 
+## Screenshots
+
+![countries_mobile_300x500](https://github.com/julilan/countries-app/assets/122397061/26cb5477-034d-4bdc-94e7-4356548164be)
+![country-cards-resize](https://github.com/julilan/countries-app/assets/122397061/9140bb01-0196-4bd1-a5ce-e1f10d5b3bb7)
+![country_single-resize](https://github.com/julilan/countries-app/assets/122397061/e2d3bfa0-ea6f-4f6f-8de8-a0093cdced7e)
+
 ## Author and acknowledgements
 
 Julianna Molnár
