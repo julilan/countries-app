@@ -35,6 +35,7 @@ const App = () => {
       <Toaster position='bottom-center' />
       <ScrollToTop
         smooth
+        top={100}
         component={<i className='bi bi-arrow-up'></i>}
         className='rounded-circle p-2 bg-primary text-white'
       />
