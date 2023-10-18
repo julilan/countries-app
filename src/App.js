@@ -8,6 +8,7 @@ import Layout from './pages/Layout';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Toaster } from 'react-hot-toast';
+import ScrollToTop from 'react-scroll-to-top';
 import ProtectedRoute from './auth/ProtectedRoute';
 import { auth } from './auth/firebase';
 import Favourites from './components/Favourites';
@@ -32,6 +33,11 @@ const App = () => {
         </Route>
       </Routes>
       <Toaster position='bottom-center' />
+      <ScrollToTop
+        smooth
+        component={<i className='bi bi-arrow-up'></i>}
+        className='rounded-circle p-2 bg-primary text-white'
+      />
     </BrowserRouter>
   );
 };
