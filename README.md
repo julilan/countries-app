@@ -12,6 +12,13 @@ Built with:
 - Firebase Authentication
 - Firestore Database
 
+Additional libraries:
+
+- Axios
+- Bootstrap Icons
+- [React Hot Toast](https://react-hot-toast.com/docs) for beautiful notifications ✨
+- [React Scroll-To-Top](https://www.npmjs.com/package/react-scroll-to-top) for lightweight and easily customisable scroll-to-top component
+
 ## Setup and usage
 
 ### Features
