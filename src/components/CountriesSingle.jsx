@@ -197,11 +197,11 @@ const CountriesSingle = () => {
               title='Google Maps Embed'
               src={`https://www.google.com/maps/embed/v1/place?key=${
                 process.env.REACT_APP_GOOGLE_MAPS_EMBED_API_KEY
-              }&q=${
-                encodeURIComponent(country.capital) +
-                '+' +
-                encodeURIComponent(country.name.common)
-              }`}
+              }&q=${encodeURIComponent(
+                country.capital
+                  ? country.capital + ' ' + country.name.common
+                  : country.name.common
+              )}`}
               width='100%'
               height='100%'
               allowFullScreen
