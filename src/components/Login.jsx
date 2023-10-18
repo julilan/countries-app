@@ -21,7 +21,9 @@ const Login = () => {
         <Row>
           <Col className='mt-4 d-flex justify-content-center'>
             <Form>
-              <h2 className='mt-4'>Login to Countries App 🌍</h2>
+              <h2 className='mt-4'>
+                Login to Countries App <i className='bi bi-globe'></i>
+              </h2>
               <Form.Group className='mb-3' controlId='formBasicEmail'>
                 <Form.Label>Email</Form.Label>
                 <Form.Control

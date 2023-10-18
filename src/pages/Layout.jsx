@@ -18,7 +18,9 @@ const Layout = () => {
         <Navbar bg='light' variant='light' expand='lg'>
           <Container className='justify-content-end'>
             <LinkContainer to='/'>
-              <Navbar.Brand href='/'>Countries App</Navbar.Brand>
+              <Navbar.Brand href='/'>
+                Countries App <i className='bi bi-globe'></i>
+              </Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
