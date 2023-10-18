@@ -28,20 +28,17 @@ const CountriesSingle = () => {
   let sunsetTime = '';
   let daylightLength = '';
 
-  // Case South Africa
-  let weatherCapital = '';
-  if (country.name.common === 'South Africa') {
-    weatherCapital = country.capital[0];
-  }
-
   useEffect(() => {
     if (!country.capital) {
       setLoading(false);
       setErrors(true);
     } else {
+      setErrors(false);
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+            country.capital[0]
+          )}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
         )
         .then((res) => {
           setWeather(res.data);
@@ -51,7 +48,9 @@ const CountriesSingle = () => {
           // If the city is not found, try fetching weather data with the country name
           axios
             .get(
-              `https://api.openweathermap.org/data/2.5/weather?q=${country.name.official}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+              `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+                country.name.common
+              )}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
             )
             .then((res) => {
               setWeather(res.data);
@@ -65,7 +64,7 @@ const CountriesSingle = () => {
             });
         });
     }
-  }, [country.capital, country.name.official]);
+  }, [country.capital, country.name.common]);
 
   if (weather) {
     const sunriseDate = new Date(weather.sys.sunrise * 1000);
@@ -128,19 +127,11 @@ const CountriesSingle = () => {
             )}
             {!errors && weather && (
               <>
-                {weatherCapital.length > 0 ? (
-                  <p>
-                    Right now it is{' '}
-                    <strong>{parseInt(weather.main.temp)}</strong> degrees in{' '}
-                    {weatherCapital} and {weather.weather[0].description}
-                  </p>
-                ) : (
-                  <p>
-                    Right now it is{' '}
-                    <strong>{parseInt(weather.main.temp)}</strong> degrees in{' '}
-                    {country.capital} and {weather.weather[0].description}
-                  </p>
-                )}
+                <p>
+                  Right now it is <strong>{parseInt(weather.main.temp)}</strong>{' '}
+                  degrees in {country.capital[0]} and{' '}
+                  {weather.weather[0].description}
+                </p>
                 <img
                   src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                   alt={`${weather.weather[0].description}`}
