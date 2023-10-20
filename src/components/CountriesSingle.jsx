@@ -38,7 +38,9 @@ const CountriesSingle = () => {
         .get(
           `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
             country.capital[0]
-          )}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_KEY}`
+          )},${country.cca2}&units=metric&appid=${
+            process.env.REACT_APP_OPENWEATHER_KEY
+          }`
         )
         .then((res) => {
           setWeather(res.data);
@@ -64,7 +66,7 @@ const CountriesSingle = () => {
             });
         });
     }
-  }, [country.capital, country.name.common]);
+  }, [country.capital, country.name.common, country.cca2]);
 
   if (weather) {
     const sunriseDate = new Date(weather.sys.sunrise * 1000);
