@@ -1,11 +1,11 @@
-import React from 'react';
-import { Card, Col, ListGroup } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap';
+import React from "react";
+import { Card, Col, ListGroup } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
 import {
   addFavourite,
   removeFavourite,
-} from '../features/countries/favouritesSlice';
+} from "../features/countries/favouritesSlice";
 
 const CountryCard = ({ country }) => {
   const favouritesList = useSelector((state) => state.favourites.favourites);
@@ -28,16 +28,17 @@ const CountryCard = ({ country }) => {
         <LinkContainer
           to={`/countries/${country.name.common}`}
           state={{ country: country }}
+          style={{ cursor: "pointer" }}
         >
           <div>
             <Card.Img
               variant='top'
               src={country.flags.svg}
-              className='rounded h-50'
+              className='rounded-0 h-50'
               style={{
-                objectFit: 'cover',
-                minHeight: '200px',
-                maxHeight: '200px',
+                objectFit: "cover",
+                minHeight: "200px",
+                maxHeight: "200px",
               }}
             />
             <Card.Body className='d-flex flex-column'>
@@ -45,7 +46,7 @@ const CountryCard = ({ country }) => {
                 {country.name.common}
               </Card.Title>
               <Card.Subtitle className='mb-2 text-muted'>
-                {country.capital?.join(', ')}
+                {country.capital?.join(", ")}
               </Card.Subtitle>
               <ListGroup
                 variant='flush'
@@ -53,16 +54,16 @@ const CountryCard = ({ country }) => {
               >
                 <ListGroup.Item>
                   <i className='bi bi-translate me-2'></i>
-                  {Object.values(country.languages ?? {}).join(', ')}
+                  {Object.values(country.languages ?? {}).join(", ")}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <i className='bi bi-cash-coin me-2'></i>{' '}
+                  <i className='bi bi-cash-coin me-2'></i>{" "}
                   {Object.values(country.currencies ?? {})
                     .map((currency) => currency.name)
-                    .join(', ')}
+                    .join(", ")}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <i className='bi bi-people me-2'></i>{' '}
+                  <i className='bi bi-people me-2'></i>{" "}
                   {country.population.toLocaleString()}
                 </ListGroup.Item>
               </ListGroup>
