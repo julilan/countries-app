@@ -42,9 +42,12 @@ Install dependencies with `npm install` and run app in development mode with `np
 
 ## Screenshots
 
-![countries_mobile_300x500](https://github.com/julilan/countries-app/assets/122397061/26cb5477-034d-4bdc-94e7-4356548164be)
-![country-cards-resize](https://github.com/julilan/countries-app/assets/122397061/9140bb01-0196-4bd1-a5ce-e1f10d5b3bb7)
-![country_single-resize](https://github.com/julilan/countries-app/assets/122397061/e2d3bfa0-ea6f-4f6f-8de8-a0093cdced7e)
+<img width="355" alt="Screenshot 2023-12-27 at 22 36 31" src="https://github.com/julilan/countries-app/assets/122397061/9c67aeed-810c-464b-8997-517de8e8f0de">
+
+<img width="1434" alt="Screenshot 2023-12-27 at 22 46 31" src="https://github.com/julilan/countries-app/assets/122397061/acd4f648-d613-41b3-b685-4dcbaac7771b">
+
+<img width="1432" alt="Screenshot 2023-12-27 at 22 47 33" src="https://github.com/julilan/countries-app/assets/122397061/9b40c075-3650-4ec1-b4e7-0046e1e2354a">
+
 
 ## Author and acknowledgements
 
