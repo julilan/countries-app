@@ -25,9 +25,7 @@ Additional libraries:
 - User can register, log in and log out.
 
 - User can view a list of `countries` and filter them by country name. User can add countries to `favourites` and view details of a country by clicking the country card. User can view a list of favourite countries and also clear their favourites.
-### Live site
 
-Deployed to Vercel: https://countries-app-julilan.vercel.app/
 ### Local
 
 Clone repository
